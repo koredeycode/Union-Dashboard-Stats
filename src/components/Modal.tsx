@@ -61,7 +61,7 @@ const IDModal = ({
 
   const shareText = `🫡 zkgm @union_build Army 🪖\nA level ${userData?.level} ${userData?.title} soldier reporting for duty.\nHere's my zkID card!
 
-Check yours at: https://your-dashboard-link.com
+Check yours at: https://union-dashboard-stats.vercel.app/
 
 Built with ❤️ by @korefomo`;
 
