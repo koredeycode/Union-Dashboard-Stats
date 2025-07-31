@@ -13,7 +13,7 @@ const LevelBarChart = ({ levelPercentages }: LevelBarChartProps) => {
       <div className="flex justify-around items-end h-48 pt-4 space-x-2">
         {levels.map((level) => {
           const percentageStr = levelPercentages[level] || "0%";
-          const percent = parseFloat(percentageStr);
+          // const percent = parseFloat(percentageStr);
 
           return (
             <div

@@ -23,7 +23,7 @@ const levelToTitle: { [level: string]: string } = {
 
 const LevelTable = ({ levelRanges, levelTitles }: LevelTableProps) => {
   const levels = Object.keys(levelRanges).sort((a, b) => Number(a) - Number(b));
-
+  console.log(levelTitles);
   return (
     <section className="chart_container bg-card-bg rounded-xl">
       <h2 className="text-lg font-medium text-text-primary mb-4">

@@ -1,8 +1,8 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import StatCard from "./components/StatCard";
-import GetIDButton from "./components/GetIDButton";
-import LevelBarChart from "./components/LevelBarChart";
+// import GetIDButton from "./components/GetIDButton";
+// import LevelBarChart from "./components/LevelBarChart";
 import XpPieChart from "./components/XpPieChart";
 import LevelTable from "./components/LevelTable";
 import TitleDistribution from "./components/TitleDistribution";

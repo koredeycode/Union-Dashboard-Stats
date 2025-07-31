@@ -3,13 +3,13 @@ import IDModal from "./Modal";
 
 const GetIDButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [idStep, setIdStep] = useState<"input" | "loading" | "success">(
-    "input"
-  );
+  // const [idStep, setIdStep] = useState<"input" | "loading" | "success">(
+  //   "input"
+  // );
 
   const handleClick = () => {
     setIsModalOpen(true);
-    setIdStep("input");
+    // setIdStep("input");
   };
 
   return (
