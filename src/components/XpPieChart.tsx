@@ -37,7 +37,7 @@ const XpPieChart = ({
       </h2>
       <div className="flex flex-col items-center justify-start gap-6 mt-4">
         {/* SVG Ring */}
-        <div className="relative w-50 h-50 flex-shrink-0 mb-8">
+        <div className="relative w-50 h-50 flex-shrink-0 mb-4">
           <svg className="w-full h-full" viewBox="0 0 36 36">
             <circle
               cx="18"

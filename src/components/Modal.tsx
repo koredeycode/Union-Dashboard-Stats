@@ -136,23 +136,17 @@ Built with ❤️ by @korefomo`;
     setDownloaded(true);
   };
 
-  useEffect(() => {
-    if (userData) {
-      console.log("Updated userData:", userData);
-    }
-  }, [userData]);
-
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md">
       <div
         ref={modalRef}
         className="bg-transparent rounded-lg w-full max-w-[320px] mx-4 relative"
       >
         <button
           onClick={onClose}
-          className="absolute -top-3 -right-3 bg-white/20 backdrop-blur-sm rounded-full p-1 text-white hover:bg-white/30 transition-colors z-10"
+          className="absolute -top-3 -right-3 bg-white/20 backdrop-blur-sm rounded-full h-8 w-8 p-1 text-white hover:bg-white/30 transition-colors z-10"
         >
           <span className="material-symbols-outlined">close</span>
         </button>
@@ -187,87 +181,90 @@ Built with ❤️ by @korefomo`;
           </div>
         )}
 
-        {idStep === "card" && userData && (
-          <div className="flex flex-col items-center gap-4">
-            <div
-              ref={cardRef}
-              className="w-full bg-gradient-to-br from-purple-900 via-blue-900 to-cyan-900 rounded-lg border-2 border-[var(--id-card-accent)] shadow-2xl shadow-cyan-400/30 p-4 pt-8 text-white"
-            >
-              <div className="flex flex-col items-center">
-                <div className="relative w-32 h-32 rounded-full border-4 border-[var(--id-card-accent)] shadow-lg bg-slate-300">
-                  <img
-                    src={`https://unavatar.io/x/${userName}`}
-                    onLoad={() => setIsCardReady(true)}
-                    crossOrigin="anonymous"
-                    alt="User"
-                    className="w-full h-full rounded-full object-cover"
-                  />
-                  <div className="absolute bottom-0 right-0 bg-[var(--id-card-accent)] text-black rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg border-2 border-black">
-                    {userData.level}
+        {idStep === "card" &&
+          (userData ? (
+            <div className="flex flex-col items-center gap-4">
+              <div
+                ref={cardRef}
+                className="w-full bg-gradient-to-br from-purple-900 via-blue-900 to-cyan-900 rounded-lg border-2 border-[var(--id-card-accent)] shadow-2xl shadow-cyan-400/30 p-4 pt-8 text-white"
+              >
+                <div className="flex flex-col items-center">
+                  <div className="relative w-32 h-32 rounded-full border-4 border-[var(--id-card-accent)] shadow-lg bg-slate-300">
+                    <img
+                      src={`https://unavatar.io/x/${userName}`}
+                      onLoad={() => setIsCardReady(true)}
+                      crossOrigin="anonymous"
+                      alt="User"
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                    <div className="absolute bottom-0 right-0 bg-[var(--id-card-accent)] text-black rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg border-2 border-black">
+                      {userData.level}
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold mt-4">
+                    {userData.display_name}
+                  </h3>
+                  <div className="w-full mt-6 space-y-2 text-sm text-gray-300">
+                    <div className="flex justify-between">
+                      <span className="font-semibold">XP:</span>
+                      <span className="font-mono">
+                        {userData.total_xp.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-semibold">Rank:</span>
+                      <span className="font-mono">
+                        {userData.rank.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-semibold">Issued:</span>
+                      <span className="font-mono">29 JUL 2025</span>
+                    </div>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold mt-4">
-                  {userData.display_name}
-                </h3>
-                <div className="w-full mt-6 space-y-2 text-sm text-gray-300">
-                  <div className="flex justify-between">
-                    <span className="font-semibold">XP:</span>
-                    <span className="font-mono">
-                      {userData.total_xp.toLocaleString()}
-                    </span>
+                <div className="mt-6 pt-4 border-t border-[var(--id-card-accent)]/30 flex items-center justify-center text-center gap-2">
+                  <div className="">
+                    <img
+                      alt="User Picture"
+                      className="w-4 h-4 object-cover"
+                      src={`https://app.union.build/badges/${userData.level}.svg`}
+                    />
                   </div>
-                  <div className="flex justify-between">
-                    <span className="font-semibold">Rank:</span>
-                    <span className="font-mono">
-                      {userData.rank.toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-semibold">Issued:</span>
-                    <span className="font-mono">29 JUL 2025</span>
-                  </div>
+                  <h2
+                    className="text-xl font-bold tracking-wider"
+                    style={{ color: "var(--id-card-accent)" }}
+                  >
+                    {userData.title}
+                  </h2>
                 </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-[var(--id-card-accent)]/30 flex items-center justify-center text-center gap-2">
-                <div className="">
-                  <img
-                    alt="User Picture"
-                    className="w-4 h-4 object-cover"
-                    src={`https://app.union.build/badges/${userData.level}.svg`}
-                  />
-                </div>
-                <h2
-                  className="text-xl font-bold tracking-wider"
-                  style={{ color: "var(--id-card-accent)" }}
-                >
-                  {userData.title}
-                </h2>
-              </div>
-            </div>
 
-            {!downloaded ? (
-              <button
-                onClick={handleDownload}
-                className="flex items-center justify-center gap-2 w-full bg-[var(--id-card-accent)] text-black font-bold py-2 rounded-md hover:bg-opacity-90 transition-colors mt-2"
-              >
-                <span className="material-symbols-outlined">download</span>
-                <span>Download ID</span>
-              </button>
-            ) : (
-              <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                  shareText
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full bg-[var(--id-card-accent)] text-black font-bold py-2 rounded-md hover:bg-opacity-90 transition-colors mt-2"
-              >
-                <span className="material-symbols-outlined">share</span>
-                <span>Share to X</span>
-              </a>
-            )}
-          </div>
-        )}
+              {!downloaded ? (
+                <button
+                  onClick={handleDownload}
+                  className="flex items-center justify-center gap-2 w-full bg-[var(--id-card-accent)] text-black font-bold py-2 rounded-md hover:bg-opacity-90 transition-colors mt-2"
+                >
+                  <span className="material-symbols-outlined">download</span>
+                  <span>Download ID</span>
+                </button>
+              ) : (
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                    shareText
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full bg-[var(--id-card-accent)] text-black font-bold py-2 rounded-md hover:bg-opacity-90 transition-colors mt-2"
+                >
+                  <span className="material-symbols-outlined">share</span>
+                  <span>Share to X</span>
+                </a>
+              )}
+            </div>
+          ) : (
+            <div className="stat_card">No user found</div>
+          ))}
       </div>
     </div>
   );

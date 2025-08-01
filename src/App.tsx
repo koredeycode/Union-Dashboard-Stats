@@ -12,6 +12,7 @@ function App() {
   return (
     <div className="main_container">
       <Header />
+      <p className="typography_subtitle mb-2">Updated at: 29 JUL 2025</p>
       <section className="grid grid-cols-2 gap-4 mb-4">
         <StatCard label="Total Users" value={data.total_users} />
         <StatCard label="Total XP" value={data.total_xp} />

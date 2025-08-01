@@ -29,11 +29,11 @@ const LevelTable = ({ levelRanges, levelTitles }: LevelTableProps) => {
       <h2 className="text-lg font-medium text-text-primary mb-4">
         Level XP Ranges & Titles
       </h2>
-      <div className="overflow-x-auto">
+      <div className="">
         <table className="min-w-full">
           <thead className="bg-transparent">
             <tr>
-              {["Level", "Title", "Min XP", "Max XP"].map((head) => (
+              {["Title", "Min XP", "Max XP"].map((head) => (
                 <th
                   key={head}
                   className="px-4 py-3 whitespace-nowrap text-sm text-left font-medium text-text-secondary"
@@ -56,12 +56,6 @@ const LevelTable = ({ levelRanges, levelTitles }: LevelTableProps) => {
                     isEven ? "bg-[var(--table-row-even)]" : ""
                   }`}
                 >
-                  <td
-                    className="px-4 py-3 whitespace-nowrap text-sm font-medium"
-                    style={{ color: `var(--level-${level})` }}
-                  >
-                    {level}
-                  </td>
                   <td
                     className="px-4 py-3 whitespace-nowrap text-sm font-medium"
                     style={{ color: `var(--level-${level})` }}

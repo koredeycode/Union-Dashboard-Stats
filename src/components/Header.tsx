@@ -16,8 +16,10 @@ const Header = () => {
   return (
     <header className="w-full text-center flex justify-between items-center mb-4">
       <div className="w-[50%] md:w-auto">
-        <h1 className="typography_h1">Union Dashboard Stats</h1>
-        <p className="typography_subtitle">Updated at: 29 JUL 2025</p>
+        <h1 className="typography_h1">
+          Union Dashboard <br />
+          Stats
+        </h1>
       </div>
 
       <div>
