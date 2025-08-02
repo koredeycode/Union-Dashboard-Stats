@@ -6,6 +6,7 @@ import StatCard from "./components/StatCard";
 import XpPieChart from "./components/XpPieChart";
 import LevelTable from "./components/LevelTable";
 import TitleDistribution from "./components/TitleDistribution";
+
 import data from "./data/mockData";
 import { Analytics } from "@vercel/analytics/react";
 

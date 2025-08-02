@@ -9,17 +9,13 @@ const TitleDistribution = ({
   titleCount,
   totalUsers,
 }: TitleDistributionProps) => {
-  const titlesSorted = Object.entries(titleCount).sort(
-    ([, countA], [, countB]) => countB - countA // descending
-  );
-
   return (
     <section className="chart_container bg-card-bg rounded-xl p-6">
       <h2 className="text-lg font-medium text-text-primary mb-4">
         Title Distribution
       </h2>
       <div className="space-y-4">
-        {titlesSorted.map(([title, count], index) => {
+        {Object.entries(titleCount).map(([title, count], index) => {
           const percent = ((count / totalUsers) * 100).toFixed(2);
           const level = getLevelFromIndex(index);
 
