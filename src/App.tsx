@@ -7,6 +7,7 @@ import XpPieChart from "./components/XpPieChart";
 import LevelTable from "./components/LevelTable";
 import TitleDistribution from "./components/TitleDistribution";
 import data from "./data/mockData";
+import { Analytics } from "@vercel/analytics/react";
 
 function formatDateToLongForm(dateString: string): string {
   const date = new Date(dateString);
@@ -60,6 +61,7 @@ function App() {
       </div>
 
       <Footer />
+      <Analytics />
     </div>
   );
 }
