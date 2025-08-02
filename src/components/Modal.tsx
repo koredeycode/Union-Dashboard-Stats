@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas-pro";
+import { date } from "../App";
 
 type UserData = {
   rank: number;
@@ -59,11 +60,7 @@ const IDModal = ({
   const [isCardReady, setIsCardReady] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
 
-  const shareText = `🫡 zkgm @union_build Army 🪖\nA level ${userData?.level} ${userData?.title} soldier reporting for duty.\nHere's my zkID card!
-
-Check yours at: https://union-dashboard-stats.vercel.app/
-
-Built with ❤️ by @korefomo`;
+  const shareText = `🫡 zkgm @union_build Army 🪖\nA level ${userData?.level} ${userData?.title} soldier reporting for duty.\n\nHere's my zkID card!\n\nCheck yours at: https://union-dashboard-stats.vercel.app/\n\nBuilt with ❤️ by @korefomo`;
 
   useEffect(() => {
     if (!isOpen) {
@@ -87,6 +84,10 @@ Built with ❤️ by @korefomo`;
   // }, [isOpen, onClose]);
 
   const handleSubmit = async () => {
+    if (!userName) {
+      alert("Enter a username");
+      return;
+    }
     setIdStep("loading");
     try {
       const data = await fetchUserData(userName);
@@ -97,21 +98,6 @@ Built with ❤️ by @korefomo`;
       console.error("Error fetching user:", err);
       setIdStep("input");
     }
-
-    // setTimeout(() => {
-    //   setUserData({
-    //      rank: 2,
-    //     user_id: "0907e95e-4b26-484f-ac8b-7343b4e6423b",
-    //     total_xp: 1385,
-    //     level: 10,
-    //     current_xp: 230,
-    //     xp_required: 90,
-    //     title: "Junior Captain",
-    //     display_name: "NeuroPunker88",
-    //     pfp: "https://pbs.twimg.com/profile_images/1808047729144213505/XVhHcjQR_normal.jpg",
-    //   });
-    //   setIdStep("card");
-    // }, 1500);
   };
 
   const handleDownload = async () => {
@@ -154,22 +140,27 @@ Built with ❤️ by @korefomo`;
         {idStep === "input" && (
           <div className="p-6 bg-[var(--card-background)] rounded-lg">
             <h3 className="text-lg font-semibold text-text-primary mb-4">
-              Find User ID Card
+              Get your zkID
             </h3>
             <div className="relative">
               <input
                 onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-                className="w-full bg-[var(--background-color)] border border-[var(--table-border)] rounded-md py-3 pl-10 pr-4 text-text-primary placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-[var(--level-5)]"
-                placeholder="Find user by username..."
+                className="w-full bg-[var(--background-color)] border border-[var(--table-border)] rounded-md py-3 pl-4 pr-10 text-text-primary placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-[var(--level-5)]"
+                placeholder="Enter your twitter username"
                 type="text"
                 value={userName}
                 onChange={(e) => {
-                  setUserName(e.target.value);
+                  setUserName(e.target.value.trim());
                 }}
               />
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary">
-                search
-              </span>
+              <button>
+                <span
+                  className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary"
+                  onClick={handleSubmit}
+                >
+                  search
+                </span>
+              </button>
             </div>
           </div>
         )}
@@ -184,7 +175,7 @@ Built with ❤️ by @korefomo`;
         {idStep === "card" &&
           (userData ? (
             <div className="flex flex-col items-center gap-4">
-              <div
+              {/* <div
                 ref={cardRef}
                 className="w-full bg-gradient-to-br from-purple-900 via-blue-900 to-cyan-900 rounded-lg border-2 border-[var(--id-card-accent)] shadow-2xl shadow-cyan-400/30 p-4 pt-8 text-white"
               >
@@ -237,6 +228,77 @@ Built with ❤️ by @korefomo`;
                   >
                     {userData.title}
                   </h2>
+                </div>
+              </div> */}
+              <div
+                ref={cardRef}
+                className="w-full bg-[var(--card-background)] border border-[var(--id-card-accent)] shadow-lg rounded-md p-4 font-mono text-white relative"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to bottom right, #111827, #1f2937)",
+                  fontFamily: "OCR A Std, monospace", // looks like military typeface
+                }}
+              >
+                {/* Top Row: PFP and Info */}
+                <div className="flex items-start gap-4">
+                  {/* Profile Photo */}
+                  <div className="relative w-28 h-28 rounded-full border-4 border-[var(--id-card-accent)] shadow-lg bg-slate-300">
+                    <img
+                      src={`https://unavatar.io/x/${userData.display_name}`}
+                      onLoad={() => setIsCardReady(true)}
+                      crossOrigin="anonymous"
+                      alt="User"
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                    <div className="absolute bottom-0 right-0 bg-[var(--id-card-accent)] text-black rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg border-2 border-black">
+                      {userData.level}
+                    </div>
+                  </div>
+
+                  {/* User Info */}
+                  <div className="flex-1">
+                    <h2 className="text-xl font-bold uppercase">
+                      {userData.display_name}
+                    </h2>
+                    <hr className="my-4 border-[var(--id-card-accent)] opacity-30" />
+
+                    <div className="flex flex-col items-center gap-2">
+                      <img
+                        alt="User Picture"
+                        className="w-8 h-8 object-cover"
+                        src={`https://app.union.build/badges/${userData.level}.svg`}
+                      />
+                      <span className="text-sm mt-1">{userData.title}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Divider Line */}
+                <hr className="my-4 border-[var(--id-card-accent)] opacity-30" />
+
+                {/* Stats Section */}
+                <div className="text-sm space-y-1">
+                  <div className="flex justify-between">
+                    <span>⚔️ XP</span>
+                    <span>{userData.total_xp.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>🎖️ Rank</span>
+                    <span>{userData.rank.toLocaleString()}</span>
+                  </div>
+                </div>
+
+                {/* Bottom: Army Stamp */}
+                <div className="mt-4 border-t pt-2 border-[var(--id-card-accent)]/50 text-center">
+                  <h2 className="text-lg font-bold tracking-widest text-[var(--id-card-accent)]">
+                    ZKGM UNION ARMY
+                  </h2>
+                  <p className="text-xs mt-1 text-gray-400">
+                    Identification Card
+                  </p>
+                  <p className="text-xs mt-2 opacity-70 text  italic">
+                    Issued: {date}
+                  </p>
                 </div>
               </div>
 

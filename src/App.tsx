@@ -8,11 +8,36 @@ import LevelTable from "./components/LevelTable";
 import TitleDistribution from "./components/TitleDistribution";
 import data from "./data/mockData";
 
+function formatDateToLongForm(dateString: string): string {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const year = date.getFullYear();
+
+  const getOrdinalSuffix = (n: number) => {
+    if (n >= 11 && n <= 13) return "th";
+    switch (n % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  return `${day}${getOrdinalSuffix(day)} ${month} ${year}`;
+}
+
+export const date = formatDateToLongForm(data.date);
+
 function App() {
   return (
     <div className="main_container">
       <Header />
-      <p className="typography_subtitle mb-2">Updated at: 29 JUL 2025</p>
+      <p className="typography_subtitle mb-2">Last Updated At: {date}</p>
       <section className="grid grid-cols-2 gap-4 mb-4">
         <StatCard label="Total Users" value={data.total_users} />
         <StatCard label="Total XP" value={data.total_xp} />

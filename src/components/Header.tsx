@@ -18,7 +18,7 @@ const Header = () => {
       <div className="w-[50%] md:w-auto">
         <h1 className="typography_h1">
           Union Dashboard <br />
-          Stats
+          Statitstics
         </h1>
       </div>
 
